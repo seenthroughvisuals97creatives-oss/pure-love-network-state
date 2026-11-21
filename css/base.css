@@ -1,0 +1,64 @@
+/* =====================================================================
+   css/base.css — PAGE-WIDE BASICS
+   Reset, fonts, the stage, the spine column, shared button style.
+   Colours come from css/architecture.css.
+   ===================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; height: 100%; }
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--ink);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The stage: warm ivory light fills the sides where the wings will later stand. */
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 40%, #fbf8f1 0%, var(--ivory) 55%, #ece5d6 100%);
+}
+
+/* The spine: the central column. Entrance and lift live only inside it. */
+.spine {
+  position: relative;
+  width: var(--spine-width);
+  min-width: min(100vw, 340px);
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* Shared button (popup Continue, door ENTER). */
+.btn {
+  font: 600 0.8rem/1 "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 0.95rem 2rem;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+.btn:hover, .btn:focus-visible { background: var(--gold); color: #fff; outline: none; }
+
+/* Elements that appear later in the sequence start hidden. */
+.reveal { opacity: 0; visibility: hidden; transition: opacity 1.4s ease, visibility 0s linear 1.4s; }
+.reveal.visible { opacity: 1; visibility: visible; transition: opacity 1.4s ease; }
+
+/* Gentle breathing: slow and soft (about 6s per breath, small size change,
+   no flashing), so it is safe for people with photosensitive epilepsy. */
+@keyframes breathe {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 18px 2px rgba(200,169,106,.30); }
+  50%      { transform: scale(1.04); box-shadow: 0 0 34px 8px rgba(200,169,106,.50); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01s !important; }
+}
