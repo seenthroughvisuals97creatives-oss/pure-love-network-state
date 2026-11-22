@@ -1,0 +1,47 @@
+/* =====================================================================
+   css/architecture.css — THE BUILDING'S COLOURS AND PROPORTIONS
+   Edit here to change the palette or the 36 / 32 / 32 geometry.
+   Nothing else in the code invents its own proportion.
+   ===================================================================== */
+:root {
+  /* --- Geometry (blueprint section 6, decision 39) --- */
+  --spine-width: 36vw;          /* central column: entrance, lift, exit */
+  --wing-width: 32vw;           /* each wing (used when wings are built) */
+  --marquee-band: 48px;         /* marquee band height */
+
+  /* --- The building seen through the gate (css/backdrop.css) ---
+         The ground line sits at 14.3% of the picture's height; the gate
+         stands on that line, so both use these two values. */
+  --art-h: min(100svh, 1000px);
+  --ground-h: calc(var(--art-h) * 0.143);
+
+  /* --- Permanent palette (blueprint section 14) --- */
+  --ivory: #F6F1E7;             /* dominant wall */
+  --champagne: #CFCBC2;         /* structure */
+  --gold: #C8A96A;              /* fine details only */
+  --ash: #8d887f;               /* supporting neutral */
+  --charcoal: #2a2a2d;          /* entrance popup only */
+  --ink: #3a342e;               /* body text on ivory */
+
+  /* --- The gate's own colour (change here to repaint the gate) --- */
+  --gate-wood: #34312e;          /* steel (the names say wood from an earlier version) */
+  --gate-wood-light: #504b45;
+
+  /* --- The visitor's colour. Set at the entrance; used ONLY for their
+         name and personal accents, never to repaint the building. --- */
+  --visitor: var(--gold);
+  --visitor-light: var(--visitor);   /* lighter / deeper shades of their colour, */
+  --visitor-deep:  var(--visitor);   /* used for the flower and the clock hands  */
+}
+@supports (color: color-mix(in srgb, red, blue)) {
+  :root {
+    --visitor-light: color-mix(in srgb, var(--visitor), #ffffff 42%);
+    --visitor-deep:  color-mix(in srgb, var(--visitor), #000000 28%);
+  }
+}
+
+/* Phones: the spine fills the screen (blueprint decision 42). */
+@media (max-width: 900px) {
+  /* --peek = the sliver of each wing that shows beside the lift (the lift is min(84vw, 520px) wide) */
+  :root { --spine-width: 100vw; --peek: calc((100vw - min(84vw, 520px)) / 2); }
+}

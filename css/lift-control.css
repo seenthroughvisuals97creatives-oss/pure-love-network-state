@@ -1,0 +1,144 @@
+/* =====================================================================
+   css/lift-control.css — CLOCK, FLOOR INDICATOR, LOOPING WORDS,
+   LOGO CIRCLE, MARQUEE AND THE FLOATING PANEL (floors + menu)
+   Behaviour: js/lift-control.js.  Wording: data/copy.js (lift, liftWords).
+   Announcements: data/announcements.js.  Floors: data/floors.js.
+   Menu items: data/popups.js.
+   ===================================================================== */
+
+/* ---------- Left of the middle: clock, floor indicator beside it, words under ---------- */
+.lift-cluster { display: flex; align-items: center; gap: .55rem; width: 100%; }
+
+/* Analogue clock: the hands wear the visitor's colour in three shades */
+.lift-clock { flex: 0 0 auto; width: clamp(52px, 15vw, 72px); height: auto; }
+.clock-face  { fill: rgba(255,255,255,.7); stroke: var(--gold); stroke-width: 1.6; }
+.clock-ticks line { stroke: var(--ash); stroke-width: 1.2; stroke-linecap: round; }
+.clock-ticks line.major { stroke: var(--gold); stroke-width: 2; }
+.hand { stroke-linecap: round; }
+.hand-h { stroke: var(--visitor-deep);  stroke-width: 3.4; }
+.hand-m { stroke: var(--visitor);       stroke-width: 2.4; }
+.hand-s { stroke: var(--visitor-light); stroke-width: 1.1; }
+.clock-pin { fill: var(--visitor-deep); }
+
+/* Floor indicator (compact, sits in front of the clock) */
+.floor-indicator {
+  position: relative; flex: 1 1 auto; min-width: 0;
+  display: grid; grid-template-columns: auto 1fr; column-gap: .5rem; align-items: center;
+  padding: .4rem .6rem; border: 1px solid rgba(200,169,106,.7); border-radius: 12px;
+  background: rgba(255,255,255,.7); color: var(--ink);
+}
+.fi-light {
+  position: absolute; top: 6px; right: 8px; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 7px 2px rgba(200,169,106,.6);
+}
+.fi-current { grid-row: 1 / 3; font-size: 1.7rem; line-height: 1; min-width: 1ch; text-align: center; }
+.fi-dir, .fi-trip {
+  font: .6rem/1.35 "Helvetica Neue", Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #6b6358;
+  overflow-wrap: anywhere;
+}
+.floor-indicator.moving .fi-dir { color: var(--visitor-deep); }
+.floor-indicator.moving .fi-light { animation: soft-pulse 2.4s ease-in-out infinite; }
+@keyframes soft-pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+/* Single looping words under the cluster (not the marquee) */
+.lift-words { margin: 0; min-height: 3.2em; width: 100%; text-align: left; display: flex; flex-direction: column; gap: .15rem; transition: opacity 1.8s ease; }
+.lift-words.dim { opacity: 0; }
+.lw-word { font-size: clamp(1rem, 3.6vw, 1.2rem); letter-spacing: .08em; color: var(--ink); }
+.lw-line { font: italic .78rem/1.4 Georgia, serif; color: #6b6358; }
+
+/* ---------- Bottom: identity panel = logo circle + marquee ---------- */
+.lift-identity { position: relative; z-index: 5; flex: 0 0 auto; margin-top: .7rem; }
+.lift-title {
+  margin: 0 0 .45rem; text-align: center; font: .64rem/1.5 "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--ash);
+}
+.lift-title span { display: block; }
+.lift-title-sep { display: none !important; }
+.marquee-bar { position: relative; display: flex; align-items: center; height: 60px; }
+
+/* The circle = community logo = the floating-panel control */
+.logo-control {
+  position: relative; z-index: 3; flex: 0 0 auto; width: 60px; height: 60px; padding: 0; margin-right: -14px;
+  border-radius: 50%; border: 2px solid var(--gold); background: #fbf8f1; cursor: pointer; overflow: hidden;
+  box-shadow: 0 4px 14px rgba(60,50,40,.2);
+  transition: box-shadow .4s ease;
+}
+.logo-control:hover, .logo-control:focus-visible, .logo-control[aria-expanded="true"] {
+  outline: none; box-shadow: 0 0 0 4px rgba(200,169,106,.35), 0 4px 14px rgba(60,50,40,.2);
+}
+.logo-control-img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.logo-control.broken .logo-control-img { visibility: hidden; }
+
+/* The marquee band: announcements come out of the circle and flow LEFT TO RIGHT, slowly.
+   The words are centred in the band top to bottom. */
+.marquee {
+  position: relative; z-index: 2; flex: 1 1 auto; height: 40px; overflow: hidden;
+  border-top: 1px solid rgba(200,169,106,.7); border-bottom: 1px solid rgba(200,169,106,.7);
+  background: rgba(255,255,255,.55); border-radius: 0 999px 999px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 16%, #000 100%);
+}
+.marquee-track {
+  display: flex; align-items: center; height: 100%; width: max-content;
+  animation: marquee-ltr var(--marquee-seconds, 45s) linear infinite;
+}
+.marquee-track > div { display: flex; align-items: center; height: 100%; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+.marquee-item {
+  flex: 0 0 auto; white-space: nowrap; padding: .12em .9rem 0; color: var(--ink); text-decoration: none;
+  font: .74rem/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase;
+}
+a.marquee-item { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; }
+.marquee-sep { flex: 0 0 auto; color: var(--gold); font-size: .74rem; line-height: 1; }
+/* the track holds two identical halves; sliding by half its width loops it with no jump */
+@keyframes marquee-ltr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+/* ---------- The floating panel: floor numbers on top, the five menu items below.
+   It opens over the EMPTY space under the clock, and never reaches the flower pillar. ---------- */
+.floor-panel {
+  position: absolute; left: 0; bottom: calc(100% - 20px); z-index: 6;
+  width: calc(100% - var(--pillar-col) - .9rem);
+  padding: .8rem .8rem .5rem; border: 1px solid rgba(200,169,106,.8); border-radius: 16px;
+  background: rgb(251,248,241); box-shadow: 0 16px 38px rgba(60,50,40,.28);
+  opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease;
+}
+.floor-panel.show { opacity: 1; transform: translateY(0); }
+.floor-panel[hidden] { display: none; }
+.fp-heading { margin: 0 0 .5rem; font: .62rem/1.3 "Helvetica Neue", Arial, sans-serif; letter-spacing: .26em; text-transform: uppercase; color: var(--ash); }
+
+/* Floor numbers: lift buttons. Each has its own small light; yours is lit. */
+.fp-floors { display: grid; grid-template-columns: repeat(auto-fill, minmax(34px, 1fr)); gap: .3rem; justify-items: start; }
+.fp-floor {
+  position: relative; width: 34px; height: 34px; padding: 0; border-radius: 50%;
+  border: 1px solid rgba(200,169,106,.55); background: transparent; color: var(--ink);
+  font: 1.05rem/1 Georgia, serif; cursor: pointer; transition: background .3s ease, border-color .3s ease;
+}
+.fp-floor::after { /* the light */
+  content: ""; position: absolute; top: 4px; right: 4px; width: 5px; height: 5px; border-radius: 50%; background: #d8d2c4;
+}
+.fp-floor:hover, .fp-floor:focus-visible { background: rgba(200,169,106,.14); outline: none; }
+.fp-floor:disabled { cursor: default; opacity: .55; }
+.fp-floor[aria-current="true"] { border-color: var(--gold); background: rgba(255,255,255,.9); box-shadow: 0 0 0 2px rgba(200,169,106,.35); }
+.fp-floor[aria-current="true"]::after { background: var(--gold); box-shadow: 0 0 7px 2px rgba(200,169,106,.7); }
+
+.fp-rule { height: 1px; margin: .65rem 0 .2rem; background: linear-gradient(90deg, transparent, rgba(200,169,106,.7), transparent); }
+
+/* Menu items: readable, modest, no bullets */
+.fp-menu { list-style: none; margin: 0; padding: 0; }
+.fp-menu-item {
+  display: block; width: 100%; padding: .5rem .2rem; border: 0; background: transparent; cursor: pointer; text-align: left;
+  font: .76rem/1.2 "Helvetica Neue", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  border-bottom: 1px solid rgba(200,169,106,.25); transition: color .3s ease, padding-left .3s ease;
+}
+.fp-menu li:last-child .fp-menu-item { border-bottom: 0; }
+.fp-menu-item:hover, .fp-menu-item:focus-visible { outline: none; color: var(--visitor-deep); padding-left: .5rem; }
+
+/* Short phone screens: the panel is made more compact so it still opens over empty space */
+@media (max-height: 700px) {
+  .floor-panel { padding: .55rem .7rem .3rem; }
+  .fp-heading { display: none; }
+  .fp-floors { grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)); gap: .2rem; }
+  .fp-floor { width: 30px; height: 30px; font-size: .9rem; }
+  .fp-rule { margin: .5rem 0 .1rem; }
+  .fp-menu-item { padding: .34rem .2rem; font-size: .72rem; }
+}
