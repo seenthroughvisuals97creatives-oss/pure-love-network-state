@@ -1,0 +1,51 @@
+PURE LOVE NETWORK STATE — WHAT EACH FILE CONTROLS
+==================================================
+Every file also says what it controls in a note at its top.
+
+I WANT TO ...                                   OPEN THIS FILE
+----------------------------------------------  -------------------------------------
+Swap the gate / lift circle logo                data/copy.js  -> logos.community
+Swap the door logo                              data/copy.js  -> logos.network
+   (put the PNG in assets/logos/, then change the one path)
+Change the words on top of the gate             data/copy.js  -> gateInscription
+Change the popup wording                        data/copy.js  -> personalise
+Change the colour swatches                      data/copy.js  -> swatches
+Change the welcome on the door                  data/copy.js  -> door
+Change the title under the door logo            data/copy.js  -> networkTitle
+Add or change the LOOPING WELCOME in the lift   data/copy.js  -> liftLoop   (add a line)
+Add or change the single words in the lift      data/copy.js  -> liftWords  (add a line)
+Add or change MARQUEE announcements             data/announcements.js
+Add, rename or reorder floors and wings         data/floors.js
+Add projects (later)                            data/projects.js
+Make steps faster or slower                     data/copy.js  -> timings
+
+The picture seen through the gate               assets/entrance/building-backdrop.svg
+                                                (or use your own: change the path in css/backdrop.css)
+The hall behind the door (ground floor)         assets/entrance/lobby.svg
+The flowers on the door frame                   assets/entrance/garland-h.svg and garland-v.svg
+The flowers on the lift walls                   assets/elevator/floral-wall.svg
+
+How the gate and popup look                     css/entrance.css
+How the door frame, door and lobby look         css/door.css
+How the lift walls, flower, particles look      css/elevator.css
+How the clock, indicator, marquee, panel look   css/lift-control.css
+Building colours and proportions                css/architecture.css
+
+The ORDER of the entrance story                 js/entrance.js
+The lift doors, welcome loop, particles         js/elevator.js
+The floor control, clock, marquee, travelling   js/lift-control.js
+
+IF A NEW VERSION LOOKS UNCHANGED
+  Your browser is showing old files. Open index.html and change ?v=5 to ?v=6
+  (any new number) everywhere it appears, then upload index.html again.
+
+IF SOMETHING IS MISSING
+  A dark note appears at the bottom of the page naming the file or logo that did not
+  load. Check it is uploaded in the right folder with the same spelling and small letters.
+
+--- Added in version 6 ---
+Change the five menu items and their popup words   data/popups.js
+Change Explore / Left wing / Return wording         data/copy.js  -> wings
+How the wings look (sizes, Explore strip, arrows)   css/wings.css
+How the wings work (swipe, tap, badge)              js/wings.js
+How the floating popup looks                        css/popup.css
