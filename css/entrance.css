@@ -1,0 +1,160 @@
+/* =====================================================================
+   css/entrance.css — HOW THE GATE, THE DARK STAGE AND THE POPUP LOOK
+   Wording is NOT here (data/copy.js). Colours: css/architecture.css.
+   The picture seen through the gate: css/backdrop.css.
+   The door, its frame and the lobby: css/door.css.
+   Which element is visible when is controlled by js/entrance.js,
+   which adds/removes the classes named below (.open, .fade, .gone, .show).
+   ===================================================================== */
+
+/* ---------- 1. THE GATE: modern steel, see-through ---------- */
+.gate {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: var(--ground-h);              /* the gate stands on the ground line */
+  transform-origin: 50% 85%;
+  transition: opacity 2.2s ease, transform 2.8s cubic-bezier(.5,0,.3,1);
+}
+/* After it has opened, the gate and the outside fade away as we move forward */
+.gate.gone { opacity: 0; transform: scale(1.3); pointer-events: none; }
+
+.gate-structure { position: relative; width: min(90%, 560px); display: flex; flex-direction: column; align-items: center; }
+
+/* Top beam with the inscription */
+.gate-lintel {
+  position: relative; z-index: 3; width: calc(100% + 36px); height: 46px; margin-bottom: -2px;
+  display: grid; place-items: center;
+  background: linear-gradient(180deg, var(--gate-wood-light), var(--gate-wood));
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 8px 18px rgba(40,34,28,.28);
+}
+.gate-inscription {
+  font: 600 clamp(.52rem, 2.5vw, .72rem)/1 "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--gold); white-space: nowrap;
+}
+
+/* Frame: two posts. The leaves are SEE-THROUGH (slim vertical bars). */
+.gate-frame { position: relative; width: 100%; height: min(54svh, 520px); perspective: 1600px; }
+.gate-post {
+  position: absolute; top: -2px; bottom: 0; width: 20px; z-index: 4;
+  background: linear-gradient(90deg, var(--gate-wood), var(--gate-wood-light) 55%, var(--gate-wood));
+  box-shadow: inset 0 0 0 2px rgba(200,169,106,.5);
+}
+.gate-post::before { /* a small gold light on top of each post */
+  content: ""; position: absolute; top: -11px; left: 3px; right: 3px; height: 9px;
+  background: radial-gradient(circle at 50% 70%, #fff2c4, var(--gold)); border-radius: 50% 50% 2px 2px;
+}
+.gate-post-left  { left: -10px; }
+.gate-post-right { right: -10px; }
+
+/* Leaves swing open on hinges at their OUTER edges */
+.gate-leaf {
+  position: absolute; top: 0; bottom: 0; width: calc(50% - 10px);
+  border: 6px solid var(--gate-wood);
+  background:
+    linear-gradient(180deg, var(--gate-wood-light), var(--gate-wood)) bottom / 100% 17% no-repeat,    /* low solid plate */
+    linear-gradient(var(--gate-wood), var(--gate-wood)) 0 63% / 100% 8px no-repeat,                   /* mid rail */
+    linear-gradient(var(--gate-wood), var(--gate-wood)) 0 12% / 100% 4px no-repeat,                   /* upper rail */
+    repeating-linear-gradient(90deg, var(--gate-wood) 0 4px, transparent 4px 17px);                 /* slim vertical bars */
+  box-shadow: inset 0 0 0 2px rgba(200,169,106,.55);
+  transition: transform 2.8s cubic-bezier(.45,.05,.2,1);
+}
+.gate-leaf-left  { left: 10px;  transform-origin: left center; }
+.gate-leaf-right { right: 10px; transform-origin: right center; }
+.gate-ring { /* a long gold pull handle on each inner edge */
+  position: absolute; top: 46%; width: 6px; height: 86px; margin-top: -43px;
+  border-radius: 3px; background: linear-gradient(90deg, #a98d52, #f0d58f, #a98d52);
+}
+.gate-leaf-left  .gate-ring { right: 9px; }
+.gate-leaf-right .gate-ring { left: 9px; }
+
+/* Open INWARD (away from the visitor), staying visible as slivers beside the posts */
+.gate.open .gate-leaf-left  { transform: rotateY(80deg); }
+.gate.open .gate-leaf-right { transform: rotateY(-80deg); }
+
+/* Threshold step: grounds the gate so it does not float */
+.gate-step {
+  width: calc(100% + 44px); height: 13px; border-radius: 2px;
+  background: linear-gradient(180deg, #d9d3c5, #bdb7a8);
+  box-shadow: 0 9px 16px rgba(60,50,40,.28);
+}
+
+/* The community logo seal. It is centred on the gate by a wrapper, so the
+   breathing animation can never push it off-centre. */
+.seal {
+  position: absolute; inset: 0; z-index: 5;
+  display: grid; place-items: center; pointer-events: none;
+  transition: opacity 1.8s ease;
+}
+.seal.fade { opacity: 0; }
+.seal-img {
+  width: clamp(120px, 46%, 200px); aspect-ratio: 1; object-fit: cover; border-radius: 50%;
+  background: radial-gradient(circle, #fbf8f1, #efe6d4);   /* keeps a see-through PNG readable */
+  animation: breathe 6s ease-in-out infinite;
+}
+/* If the logo picture is missing: a quiet gold ring instead of broken text */
+.seal.broken .seal-img { display: none; }
+.seal.broken::before {
+  content: ""; width: clamp(120px, 46%, 200px); aspect-ratio: 1; border-radius: 50%;
+  border: 3px solid var(--gold); background: radial-gradient(circle, #fbf8f1, #efe6d4);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+/* ---------- 2. THE DARK STAGE (the quiet space before the building) ---------- */
+.stage-dark {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at 50% 42%, #2b2b30 0%, #17171a 62%, #0d0d0f 100%);
+  transition: opacity 2.4s ease;
+}
+#stage[data-phase="approach"]    .stage-dark,
+#stage[data-phase="personalise"] .stage-dark { opacity: 1; }
+
+/* ---------- 3. THE PERSONALISATION POPUP (alone on the dark stage) ---------- */
+.popup {
+  position: absolute; top: 50%; left: 50%; z-index: 6;
+  width: min(90%, 380px);
+  transform: translate(-50%, -46%);
+  padding: 2rem 1.6rem;
+  background: var(--charcoal);
+  color: var(--ivory);
+  border: 1px solid rgba(200,169,106,.6);
+  border-radius: 22px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.4), 0 0 60px rgba(200,169,106,.12), 0 24px 60px rgba(0,0,0,.55);
+  text-align: center;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 1.4s ease, transform 1.4s ease, visibility 0s linear 1.4s;
+}
+.popup.show {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translate(-50%, -50%);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+.popup-heading { margin: 0 0 1.4rem; font-weight: 400; font-size: 1.3rem; line-height: 1.35; }
+.popup-label { margin: 1.1rem 0 .5rem; font: .78rem/1.4 "Helvetica Neue", Arial, sans-serif; letter-spacing: .12em; color: #cfc9bd; }
+
+/* The name field is WHITE so any colour shows on it. If the visitor picks a very
+   light colour (which would vanish on white), the field turns dark by itself. */
+.popup-input {
+  width: 100%; padding: .85rem 1rem; border-radius: 12px;
+  border: 1px solid rgba(200,169,106,.8); background: #ffffff;
+  font: 1.15rem Georgia, serif; text-align: center; color: var(--visitor); caret-color: var(--visitor);
+  transition: background .4s ease;
+}
+.popup-input::placeholder { color: #8d887f; opacity: 1; }
+.popup-input.on-dark { background: #1b1b1e; border-color: rgba(255,255,255,.35); }
+.popup-input.on-dark::placeholder { color: #a8a396; }
+.popup-input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+
+.swatches { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-bottom: 1.5rem; }
+.swatch {
+  width: 34px; height: 34px; border-radius: 50%; border: 2px solid transparent; cursor: pointer;
+  padding: 0; background: var(--c);
+}
+.swatch[aria-checked="true"] { border-color: #fff; box-shadow: 0 0 0 2px var(--c); }
+/* The last control: opens the browser's own colour field = every colour */
+.swatch-any {
+  background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+  position: relative; overflow: hidden;
+}
+.swatch-any input { position: absolute; inset: -6px; opacity: 0; cursor: pointer; width: 60px; height: 60px; }
+.popup .btn { color: var(--ivory); }

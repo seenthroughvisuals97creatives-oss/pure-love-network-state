@@ -1,0 +1,141 @@
+/* =====================================================================
+   css/door.css — THE WELCOME DOOR SCENE
+   The base of the tower: glass wall, plinth, an architectural door frame with
+   flowers, the door itself, and behind it the ground-floor lobby.
+   Pressing Enter: the door swings open (.door-open), then we move forward
+   through the doorway into the lobby (.advance), pause, and the lift appears.
+   Order and timing: js/entrance.js and data/copy.js -> timings.
+   Pictures: assets/entrance/lobby.svg, garland-h.svg, garland-v.svg.
+   ===================================================================== */
+.entry {
+  /* sizes shared by everything in this scene */
+  --door-w: min(92vw, calc(min(84svh, 760px) * .56));   /* door frame width: tall proportions */
+  --door-h: calc(var(--door-w) / .56);                   /* door frame height */
+  --b: clamp(22px, 6.5vw, 36px);                         /* thickness of the frame (holds the flowers) */
+  --plinth: 9svh;                                        /* the ground the door stands on */
+
+  position: absolute; inset: 0; z-index: 2; overflow: hidden;
+  opacity: 0; visibility: hidden;
+  transition: opacity 1.8s ease, visibility 0s linear 1.8s;
+}
+.entry.show { opacity: 1; visibility: visible; transition: opacity 1.8s ease; }
+.entry.leave { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 1.6s ease, visibility 0s linear 1.6s; }
+
+/* This layer is what "moves forward": it grows around the doorway */
+.entry-zoom {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: var(--plinth);
+  transform-origin: 50% calc(100% - var(--plinth) - var(--door-h) / 2);
+  transition: transform 4.2s cubic-bezier(.6,0,.3,1);
+  will-change: transform;
+}
+.entry.advance .entry-zoom { transform: scale(3.3); }
+
+/* ---------- The tower's base: glass wall and stone plinth ---------- */
+.facade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(115deg, transparent 38%, rgba(255,255,255,.3) 50%, transparent 62%),
+    repeating-linear-gradient(90deg, rgba(80,88,92,.22) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(0deg,  rgba(80,88,92,.26) 0 1px, transparent 1px 46px),
+    linear-gradient(180deg, #d3d6d1 0%, #dedbd0 62%, #e6e0d0 100%);
+}
+.entry-ground {
+  position: absolute; left: 0; right: 0; bottom: 0; height: var(--plinth);
+  background:
+    repeating-linear-gradient(90deg, rgba(120,105,80,.2) 0 1px, transparent 1px 90px),
+    linear-gradient(180deg, #e9e1cd, #d6ccb4);
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 -14px 24px rgba(60,50,40,.18);
+}
+
+/* ---------- The door frame (architrave) ---------- */
+.door-assembly {
+  position: relative; z-index: 2; width: var(--door-w); aspect-ratio: .56;
+  border: var(--b) solid #ddd7c8; border-bottom: 0;
+  box-shadow:
+    inset 0 0 0 2px var(--gold),                         /* gold line on the inner edge */
+    0 0 0 2px rgba(200,169,106,.9),                      /* gold line on the outer edge */
+    0 0 0 9px #d2cbb9, 0 0 0 10px rgba(120,110,90,.4),   /* outer moulding step */
+    0 26px 44px rgba(50,42,34,.32);
+}
+/* Cornice slab above the door, with small teeth under it */
+.door-assembly::before {
+  content: ""; position: absolute; z-index: 3;
+  left: calc(-1 * var(--b) - 20px); right: calc(-1 * var(--b) - 20px);
+  top: calc(-1 * var(--b) - 30px); height: 30px;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 6px, transparent 6px 12px) bottom / 100% 8px no-repeat,
+    linear-gradient(180deg, #ebe5d6, #d2cbb9);
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 8px 14px rgba(0,0,0,.2);
+}
+
+/* Flowers climbing the frame (pictures: assets/entrance/garland-*.svg) */
+.flora { position: absolute; z-index: 4; pointer-events: none; }
+.flora-top   { left: calc(-1 * var(--b)); right: calc(-1 * var(--b)); top: calc(-1 * var(--b)); height: var(--b);
+               background: url("../assets/entrance/garland-h.svg") repeat-x center / auto 100%; }
+.flora-left  { left: calc(-1 * var(--b)); top: 0; bottom: 0; width: var(--b);
+               background: url("../assets/entrance/garland-v.svg") repeat-y center / 100% auto; }
+.flora-right { right: calc(-1 * var(--b)); top: 0; bottom: 0; width: var(--b);
+               background: url("../assets/entrance/garland-v.svg") repeat-y center / 100% auto; }
+
+/* Doorstep */
+.door-step {
+  position: absolute; left: -34px; right: -34px; bottom: -13px; height: 13px; z-index: 3;
+  background: linear-gradient(180deg, #e3dcc9, #c3bba5); border-radius: 2px;
+  box-shadow: 0 8px 14px rgba(0,0,0,.22);
+}
+
+/* The opening: shows the lobby; the inner shading gives the frame real depth */
+.doorway { position: absolute; inset: 0; overflow: hidden; perspective: 1600px; perspective-origin: 20% 50%; background: #efe9dc; }
+.doorway::after {
+  content: ""; position: absolute; inset: 0; z-index: 6; pointer-events: none;
+  box-shadow: inset 0 20px 22px -12px rgba(0,0,0,.5), inset 14px 0 18px -10px rgba(0,0,0,.35), inset -14px 0 18px -10px rgba(0,0,0,.35);
+}
+
+/* ---------- The lobby behind the door ---------- */
+.lobby { position: absolute; inset: 0; overflow: hidden; }
+.lobby-img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1); transform-origin: 50% 48%; transition: transform 5s cubic-bezier(.4,0,.3,1); }
+.entry.advance .lobby-img { transform: scale(1.22); }
+
+/* ---------- The door leaf ---------- */
+.door {
+  position: absolute; inset: 0; z-index: 3;
+  background: linear-gradient(180deg, #fdfbf5, #f2ebda);
+  border-right: 7px solid #cfc7b2;                       /* the thickness of the door's edge */
+  transform-origin: left center;
+  transition: transform 2.8s cubic-bezier(.45,.05,.2,1);
+  overflow: hidden;
+}
+/* a moulded panel line inside the leaf */
+.door::before {
+  content: ""; position: absolute; inset: 3.2%; pointer-events: none;
+  border: 1px solid rgba(200,169,106,.85);
+  box-shadow: inset 0 0 0 5px #f8f3e6, inset 0 0 0 6px rgba(200,169,106,.5);
+}
+.entry.door-open .door { transform: rotateY(82deg); }  /* swings open INWARD, on its hinges */
+
+/* brass hinges (left) and pull handle (right) */
+.door-hinge { position: absolute; left: 0; width: 9px; height: 34px; z-index: 2; border-radius: 0 2px 2px 0;
+  background: linear-gradient(90deg, #a98d52, #f0d58f, #a98d52); box-shadow: 1px 1px 2px rgba(0,0,0,.25); }
+.hinge-1 { top: 11%; } .hinge-2 { top: 48%; } .hinge-3 { top: 84%; }
+.door-handle { position: absolute; right: 7%; top: 54%; width: 8px; height: 22%; max-height: 120px; z-index: 2; border-radius: 4px;
+  background: linear-gradient(90deg, #a98d52, #f4dd9d, #a98d52); box-shadow: 2px 3px 6px rgba(0,0,0,.28); }
+
+.door-inner {
+  position: relative; z-index: 1; height: 100%; padding: calc(17% + clamp(.4rem, 4.5svh, 2.6rem)) 11% 5%;   /* <- the space above Welcome and the name: change the 17% or the 2.6rem to adjust */
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  gap: .8rem; text-align: center; overflow-y: auto; scrollbar-width: none;
+}
+.door-inner::-webkit-scrollbar { display: none; }
+.door-greeting { margin: 0; min-height: 1.5em; font-size: clamp(1.15rem, 4.2vw, 1.55rem); line-height: 1.3; }
+.door-message  { margin: 0; min-height: 5.8em; font-size: clamp(.9rem, 3.2vw, 1.02rem); line-height: 1.6; color: #5a5249; }
+.door-logo { width: clamp(84px, 28%, 130px); aspect-ratio: 1; border-radius: 50%; object-fit: cover; margin-top: .2rem; }
+.door-logo.visible { animation: breathe 6s ease-in-out infinite; } /* breathes and STAYS (does not fade) */
+.door-logo.broken { border: 3px solid var(--gold); background: radial-gradient(circle, #fbf8f1, #efe6d4); }
+.door-title {
+  margin: 0; min-height: 3.2em; font-size: clamp(.74rem, 2.7vw, .9rem);
+  letter-spacing: .14em; text-transform: uppercase; line-height: 1.6; color: var(--ink);
+}
+.btn-enter { margin-top: .2rem; color: var(--ink); }
