@@ -83,12 +83,12 @@ const PLNS_COPY = {
      "line" is an optional short sentence shown under the word. */
   liftWords: [
     { word: 'Awareness',     line: 'Awareness brings things into view.' },
-    { word: 'Presence',      line: '' },
-    { word: 'Possibility',   line: '' },
-    { word: 'Understanding', line: '' },
-    { word: 'Connection',    line: '' },
-    { word: 'Expression',    line: '' },
-    { word: 'Love',          line: '' }
+    { word: 'Presence',      line: 'Love is a present state of being' },
+    { word: 'Possibility',   line: 'thoughts are  energy force' },
+    { word: 'Understanding', line: 'helps makes communication possible' },
+    { word: 'Connection',    line: 'both sides feeling good' },
+    { word: 'Expression',    line: 'Love is infinity is why Diversity' },
+    { word: 'Love',          line: 'Love used itself to birth all' }
   ],
 
   /* ---------- COLOUR SWATCHES ----------
