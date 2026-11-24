@@ -13,4 +13,20 @@
      links:       [ { label: 'Visit', url: 'https://...' } ]
    }
    ===================================================================== */
-const PLNS_PROJECTS = [];
+const PLNS_PROJECTS = [
+
+   {
+     projectId:   'p-community-hub',
+     title:       'Project name',
+     image:       'assets/projects/community-hub.jpg',   // put the picture in assets/projects/
+     description: 'A short description.',
+     links:       [ { label: 'Visit', url: 'https://...' } ]
+   },
+   {
+     projectId:   'p-community-hub',
+     title:       'Project name',
+     image:       'assets/projects/community-hub.jpg',   // put the picture in assets/projects/
+     description: 'A short description.',
+     links:       [ { label: 'Visit', url: 'https://...' } ]
+}
+];
