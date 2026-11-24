@@ -20,7 +20,7 @@
 }
 .backdrop-art {
   position: absolute; inset: 0;
-  background: url("../assets/entrance/building-backdrop-redesigned.svgg") center bottom / auto var(--art-h) no-repeat; /* <- EDIT the picture path here */
+  background: url("../assets/entrance/building-backdrop-redesigned.svg") center bottom / auto var(--art-h) no-repeat; /* <- EDIT the picture path here */
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
           mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
 }
