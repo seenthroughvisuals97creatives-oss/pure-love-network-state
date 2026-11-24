@@ -5,7 +5,7 @@
    ===================================================================== */
 :root {
   /* --- Geometry (blueprint section 6, decision 39) --- */
-  --spine-width: 36vw;          /* central column: entrance, lift, exit */
+  --spine-width: 46vw;          /* central column: entrance, lift, exit */
   --wing-width: 32vw;           /* each wing (used when wings are built) */
   --marquee-band: 48px;         /* marquee band height */
 
