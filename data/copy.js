@@ -10,8 +10,8 @@ const PLNS_COPY = {
      Put your PNG in assets/logos/ and change the path below. That is all.
      The placeholders (.svg) are drawn circles until your PNGs are added. */
   logos: {
-    community: 'assets/logos/community-logo.svg',  // gate seal AND the circle in the lift
-    network:   'assets/logos/network-logo.svg'     // shown on the welcome door
+    community: 'assets/logos/PureLoveCom.jpeg',  // gate seal AND the circle in the lift
+    network:   'assets/logos/pure-love-network.png'     // shown on the welcome door
   },
 
   /* ---------- THE GATE ---------- */
