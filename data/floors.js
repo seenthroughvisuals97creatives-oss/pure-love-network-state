@@ -32,7 +32,12 @@ const PLNS_BUILDING = {
       id: 'floor-3', label: '3', name: 'Third floor',
       left:  { id: 'wing-3-left',  position: 'left',  name: '', originWingId: null, entries: [] },
       right: { id: 'wing-3-right', position: 'right', name: '', originWingId: null, entries: [] }
-    }
+    },
+     {
+      id: 'floor-4', label: '3', name: 'Fourth floor',
+      left:  { id: 'wing-4-left',  position: 'left',  name: '', originWingId: null, entries: [] },
+      right: { id: 'wing-4-right', position: 'right', name: '', originWingId: null, entries: [] }
+     }
   ]
 };
 
