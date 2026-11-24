@@ -18,9 +18,9 @@ const PLNS_LIFT_SCENES = {
   fadeSeconds: 6,     // seconds the picture takes to melt into the next one
   strength: 0.7,      // how strong the pictures show (0 to 1)
   scenes: [
-    { name: 'morning',   from: 5,  image: '' },   // 5:00 to 11:59   e.g. 'assets/elevator/morning.jpg'
-    { name: 'afternoon', from: 12, image: '' },   // 12:00 to 16:59  e.g. 'assets/elevator/afternoon.jpg'
-    { name: 'evening',   from: 17, image: '' },   // 17:00 to 20:59  e.g. 'assets/elevator/evening.jpg'
-    { name: 'night',     from: 21, image: '' }    // 21:00 to 4:59   e.g. 'assets/elevator/night.jpg'
+    { name: 'morning',   from: 5,  image: 'assets/elevator/morning.jpg' },   // 5:00 to 11:59   e.g. 'assets/elevator/morning.jpg'
+    { name: 'afternoon', from: 12, image: 'assets/elevator/afternoon.jpg' },   // 12:00 to 16:59  e.g. 'assets/elevator/afternoon.jpg'
+    { name: 'evening',   from: 17, image: 'assets/elevator/evening.jpg' },   // 17:00 to 20:59  e.g. 'assets/elevator/evening.jpg'
+    { name: 'night',     from: 21, image: 'assets/elevator/night.jpg' }    // 21:00 to 4:59   e.g. 'assets/elevator/night.jpg'
   ]
 };
