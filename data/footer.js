@@ -12,8 +12,8 @@
    ===================================================================== */
 const PLNS_SITE_FOOTER = {
   links: [
-    { label: 'Pure Love Community on Substack', short: 'Community', icon: 'community', url: '' },   // <- PASTE your Substack address
-    { label: 'Pure Love Network of States',     short: 'Website',   icon: 'site',      url: '' }    // <- PASTE your network website address
+    { label: 'Pure Love Community on Substack', short: 'Community', icon: 'community', url: 'https://substack.com/@purelovenetwork?utm_source=share&utm_medium=android&r=5zj5zo&utm_content=link_in_bio&fbclid=ZgZXh0bgNhZW0CMTEAcGRvZgRzcnRjBmFwcF9pZBAzNDE5NjI4MzA1MDI1OTE3AEOoxhcB1gusJUvNA05bT_fLx9CDc0IxDo2sMPezOBcGvPFhKB3qvyUkku-DrGmLiP8_aem_nYQfs5zrJaf3DoZPahZh7A&utm_id=97760_v0_s00_e0_tv3' },   // <- PASTE your Substack address
+    { label: 'Pure Love Network of States',     short: 'Website',   icon: 'site',      url: 'https://pure-love-network.carrd.co/' }    // <- PASTE your network website address
   ],
   copyright: 'Pure Love Network of States'
 };
