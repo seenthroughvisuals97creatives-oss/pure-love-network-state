@@ -1,0 +1,183 @@
+VERSION 11 PATCH — FOOTER BAR (Substack + website + copyright) AND THE LINK-PREVIEW TAGS
+=======================================================================================
+Nothing is restructured. Only these files. Upload each into the same folder in your project.
+
+NEW FILES (just add them)
+  data/footer.js                <- PASTE YOUR SUBSTACK AND WEBSITE ADDRESSES HERE (the only place)
+  js/footer.js                  builds the footer bar
+  css/footer.css                how the footer bar looks
+  assets/share/link-preview.jpg the card that shows when your link is shared
+
+REPLACE
+  index.html     (has the footer space, the link-preview tags, and ?v=11)
+  js/popup.js    (popups now use the same addresses as the footer)
+  If you changed anything yourself in index.html, add these instead and bump ?v=10 to ?v=11:
+     <link rel="stylesheet" href="css/footer.css?v=11">   (above the css/popup.css line)
+     <script src="data/footer.js?v=11"></script>          (above the data/joinform.js line)
+     <script src="js/footer.js?v=11"></script>            (above the js/menu.js line)
+     <footer id="site-footer" class="site-footer" aria-label="Community links"></footer>   (just above <div id="pop-root" ...>)
+     plus the <meta> lines for the link preview, just under <title>.
+
+TWO THINGS YOU MUST EDIT
+  1. data/footer.js : paste your Substack address and your network website address after  url:
+     (a link stays hidden until its address is pasted in).
+  2. index.html, the link-preview <meta> lines near the top: replace YOUR-SITE-ADDRESS in the THREE places
+     with your real address from the browser bar. Keep https:// at the front.
+
+WHAT CHANGED
+  A slim frosted-glass bar sits under the lift after the doors open: community icon + Substack link,
+  globe icon + website link, and (c) the year + name. On small phones the words shorten
+  (Community / Website / (c) 2026) so it never overflows. The same two links also appear at the foot of every popup.
+
+VERSION 10 — POPUPS THAT SCROLL, REAL MEMBERSHIP, JOIN FORM, ANNOUNCEMENTS, EXIT (a PATCH: only these files)
+=============================================================================================================
+Nothing is restructured. Only the files below change; every other file stays exactly as you have it.
+
+NEW FILES (just add them)
+  data/joinform.js     the Join form: questions, wording, and where entries are emailed
+  js/menu.js           what each menu item shows inside its popup
+
+REPLACE THESE FILES (if you already typed your own wording into data/popups.js, copy it across after)
+  data/popups.js       Services, Membership, Announcements, Exit words + footer links (Substack)
+  js/popup.js          popup now scrolls (title stays, words scroll, fade shows there is more)
+  css/popup.css        looks of all popups and the form
+
+SMALL EDITS IF YOU HAVE ALREADY CHANGED THESE TWO FILES (otherwise replace them)
+  js/lift-control.js   find   PLNS.popup.open({ title: item.title, paragraphs: item.body });
+                       and change it to   PLNS.menu.open(item);
+  index.html           add these two lines in the script list:
+                         <script src="data/joinform.js?v=10"></script>   (right after the data/popups.js line)
+                         <script src="js/menu.js?v=10"></script>         (right after the js/popup.js line)
+                       then change ?v=9 to ?v=10 everywhere in the links and scripts.
+
+WHAT CHANGED
+  Every popup scrolls; the title and x stay put, a soft fade shows there is more below.
+  Our Services: live online sessions, Gift of Remembrance, creative expression, the Substack community.
+  Membership: the full agreement in your words. It must be read to the END.
+  Join the Network: a real form. Reading the Membership to its end ticks the agreement box
+     automatically; the Join button stays off until you have read it and added a name and email.
+     Entries are EMAILED to you through a free form service: see the top of data/joinform.js.
+  Announcements: a softly glowing "Newest" box on top, then the marquee announcements below it.
+  Exit: a warm thank-you with "Stay in the building" or "Leave the building".
+  Footer: your Substack and network links sit quietly at the foot of every popup (data/popups.js, PLNS_FOOTER).
+
+VERSION 9 — THE FOUR LIFT WALL PICTURES ARE INCLUDED (plus everything in versions 7 and 8 below)
+=============================================================================================
+  NEW FILES   assets/elevator/morning.jpg  afternoon.jpg  evening.jpg  night.jpg   (about 30 KB each)
+  REPLACED    data/liftscenes.js (the four paths are filled in), index.html (version number only)
+  Soft floral pictures, no words or logos. Morning: warm cream and blush, not bright.
+  Afternoon: pale sage and butter. Evening: dusty rose and apricot. Night: pale moonlit blue and
+  lilac (kept light so the writing stays readable). Flowers sit at the edges and corners; the
+  middle, the clock, the writing and the flower pillar sit over calm colour.
+  To use your own pictures later: replace the file (same name) or change the path in data/liftscenes.js.
+
+VERSION 8 — THE LIFT STARTS AT FLOOR 1 (plus everything in version 7 below)
+====================================================================
+  The ground floor is the lobby you walk through, so it is no longer in the lift.
+  The lift lists 1, 2, 3 and opens on floor 1. (data/floors.js: the ground-floor block is gone;
+  startFloor is now 'floor-1'.) Files: data/floors.js, index.html (version number only).
+
+VERSION 7 — FLOORS THAT SLIDE, TIME-OF-DAY WALLS, READABLE PROJECT CARDS, LIGHT COLOURS, DOOR SPACING
+=====================================================================================================
+Replace everything with this whole zip, or upload these over your existing files
+(same folders). If your phone shows old files, the ?v=7 in index.html is the version number.
+
+NEW FILE
+  data/liftscenes.js     (the four lift wall pictures: morning, afternoon, evening, night)
+
+REPLACED FILES
+  index.html  css/architecture.css  css/base.css  css/door.css  css/elevator.css
+  css/lift-control.css  css/wings.css  data/copy.js (re-apply your edits if you made any)
+  js/elevator.js  js/entrance.js  js/lift-control.js  js/wings.js  EDIT-GUIDE.txt
+
+WHAT CHANGED
+  Floors: the numbers in the panel slide sideways (swipe, or the small arrows). Add as many
+          floors as you like in data/floors.js; the panel never gets taller, and it opens
+          showing the floor you are on.
+  Lift walls by time of day: follow the visitor's own clock and crossfade slowly.
+          Upload four pictures to assets/elevator/ and type their file names in data/liftscenes.js.
+          Until you do, only the flowers show.
+  Wing project cards: the picture fills the card and the title and description sit on its
+          bottom edge over a dark-to-clear gradient, so they stay readable on any picture.
+          (Adjust the gradient in css/wings.css, .wc-text.)
+  Light colours (yellow, near-white): the name, flower, clock hands and rising stars now get
+          a darker outline so they stay visible on ivory (css/architecture.css, LIGHT COLOURS).
+  Door: more space above "Welcome" and the name before the door opens (css/door.css, .door-inner).
+  Lift panel: the small title above the marquee steps aside while the panel is open, so the
+          panel no longer sits over half of it.
+
+VERSION 6 — THE LIFT, THE MENU AND BOTH WINGS
+==============================================
+Upload these over your existing files, keeping the same folders
+(or replace everything with this whole zip). Then change ?v=6 in index.html
+if your phone still shows old files.
+
+NEW FILES
+  css/wings.css      js/wings.js        (the left and right wings)
+  css/popup.css      js/popup.js        (the floating popup)
+  data/popups.js                         (the five menu items and their words)
+
+REPLACED FILES
+  index.html  css/architecture.css  css/backdrop.css  css/elevator.css
+  css/lift-control.css  data/copy.js (re-apply any edits you made)
+  js/elevator.js  js/lift-control.js  EDIT-GUIDE.txt
+
+NOT CHANGED: base, entrance, door css; data/floors.js, announcements.js, projects.js;
+  js/entrance.js, main.js; all assets.
+
+WHAT CHANGED
+  Lift: clock at the left corner with the floor indicator beside it, looping word
+        and line under it; everything moved up so the panel opens over empty space.
+  Flower: an architectural pillar holding flowers in the visitor's colour, right side only.
+  Floor buttons: numbers only (G,1,2,3), with a lit light for the current floor.
+  Menu: Our Services, Membership, Join the Network, Announcements, Exit, in the same
+        floating panel under the floors. Each opens a popup (words: data/popups.js).
+        Membership wording is a DRAFT; Join, Services, Announcements and Exit are placeholders.
+  Marquee: words centred in a thinner band, 45 seconds a pass, left to right from the logo circle.
+  Desktop: a wing each side of the lift (32/36/32) with a vertical EXPLORE control on its
+        outer edge. Wings are empty (a quiet ornament) until entries are added. They appear
+        only after the lift doors open and change with the floor.
+  Phone: the lift is a little narrower so a sliver of each wing shows with a glowing arrow.
+        Tap the sliver or swipe to bring the wing in full width; tap the floor badge at the
+        top (or swipe back) to return to the lift.
+  Desktop only: the building behind the lift is quieter.
+
+STILL TO COME: time-of-day lift walls, real Membership and Join popups,
+  one small file for the looping lift messages.
+
+VERSION 5 — STEP 1: THE ENTRANCE STORY
+=======================================
+You do NOT need to delete anything. Upload these over your existing files,
+keeping the same folders. (Or replace everything with this whole zip.)
+
+NEW FILES
+  css/door.css
+  assets/entrance/lobby.svg
+  assets/entrance/garland-h.svg
+  assets/entrance/garland-v.svg
+  EDIT-GUIDE.txt
+
+REPLACED FILES
+  index.html
+  css/architecture.css
+  css/backdrop.css
+  css/entrance.css
+  data/copy.js            (your logo paths and wording are in here: re-apply any edits)
+  js/entrance.js
+  assets/entrance/building-backdrop.svg
+
+NOT CHANGED (keep yours)
+  css/base.css  css/elevator.css  css/lift-control.css
+  data/floors.js  data/announcements.js  data/projects.js
+  js/elevator.js  js/lift-control.js  js/main.js
+  assets/logos/*  assets/elevator/*
+
+WHAT CHANGED
+  - Gate: modern steel, no pagoda roof, "Pure Love Network of States" on the top beam
+  - Behind the gate: a tall skyscraper seen from the side, cropped at the top
+  - After the gate opens, the gate and the outside fade away as we move forward
+  - The popup stands alone on a dark stage; the name field is white and turns dark by
+    itself if a very light colour is chosen
+  - The welcome door is now a real door frame with flowers, set in the tower's base
+  - Enter: the door swings open, we move forward into the ground-floor lobby, a pause,
+    then the lift appears
