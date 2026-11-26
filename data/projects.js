@@ -23,10 +23,10 @@ const PLNS_PROJECTS = [
      links:       [ { label: 'Visit', url: 'https://...' } ]
    },
    {
-     projectId:   'p-community-hub',
-     title:       'Project name',
-     image:       'assets/projects/community-hub.jpg',   // put the picture in assets/projects/
+     projectId:   '97-industry',
+     title:       '97-Industry',
+     image:       'assets/projects/97-Industry.png',   // put the picture in assets/projects/
      description: 'A short description.',
-     links:       [ { label: 'Visit', url: 'https://...' } ]
+     links:       [ { label: 'Visit', url: 'https://7nine9seven.wixsite.com/97-industry' } ]
 }
 ];
