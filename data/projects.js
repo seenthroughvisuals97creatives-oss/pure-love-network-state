@@ -56,7 +56,7 @@ const PLNS_PROJECTS = [
     wing:        'left',
     openness:    'open',          // 'open', 'summary' or 'private'
     title:       '97-Community-Hub',
-    image:       'assets/projects/97-community-hub.png',
+    image:       'assets/projects/97-community-hub.jpg',
     description: 'A short description.',
     links:       [ { label: 'Visit', url: 'https://7nine9seven.wixstudio.com/community-hub-97' } ],
     /* now present */
