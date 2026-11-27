@@ -50,6 +50,7 @@ Syntax:
    ===================================================================== */
 const PLNS_PROJECTS = [
   {
+        /* Floor one now present */
     projectId:   '97-community-hub', 
     floor:       '1',
     wing:        'left',
@@ -58,7 +59,7 @@ const PLNS_PROJECTS = [
     image:       'assets/projects/community-hub.jpg',
     description: 'A short description.',
     links:       [ { label: 'Visit', url: 'https://7nine9seven.wixstudio.com/community-hub-97' } ],
-    /* no floor/wing yet, so this placeholder is not shown */
+    /* now present */
       agreement: {
       intro:          'Write here, in plain words, what 97 Community Hub and the building agreed.',
       theyBring:      [ 'What this project brings (example line)' ],
@@ -67,7 +68,7 @@ const PLNS_PROJECTS = [
       agreedOn:       ''          // e.g. 'January 2027'
            }
   },
-   
+      
   {
     projectId:   '97-industry',
     floor:       '1',
@@ -84,7 +85,52 @@ const PLNS_PROJECTS = [
       bothIncrease:   'How both sides grow from this agreement.',
       agreedOn:       ''          // e.g. 'January 2027'
     }
-  }
+  },
+
+      /*  floor 2 now present */
+{
+    projectId:   '97 Art Galaxy', 
+    floor:       '2',
+    wing:        'left',
+    openness:    'open',          // 'open', 'summary' or 'private'
+    title:       'Project name',
+    image:       'assets/projects/community-hub.jpg',
+    description: 'A short description.',
+    links:       [ { label: 'Visit', url: 'https://...' } ],
+    
+   agreement: {
+      intro:          'Write here, in plain words, what 97 Industry and the building agreed.',
+      theyBring:      [ 'What this project brings (example line)' ],
+      buildingBrings: [ 'What the building brings (example line)' ],
+      bothIncrease:   'How both sides grow from this agreement.',
+      agreedOn:       ''          // e.g. 'January 2027'
+           }
+  },
+
+     {
+    projectId:   'world-within', 
+    floor:       '2',
+    wing:        'right',
+    openness:    'open',          // 'open', 'summary' or 'private'
+    title:       'World Within',
+    image:       'assets/projects/community-hub.jpg',
+    description: 'A short description.',
+    links:       [ { label: 'Visit', url: 'https://...' } ],
+    
+   agreement: {
+      intro:          'Write here, in plain words, what 97 Industry and the building agreed.',
+      theyBring:      [ 'What this project brings (example line)' ],
+      buildingBrings: [ 'What the building brings (example line)' ],
+      bothIncrease:   'How both sides grow from this agreement.',
+      agreedOn:       ''          // e.g. 'January 2027'
+           }
+  },
+
+           /* now present */
+      /* now present */
+      /* now present */
+
+   
 ];
 
 /* The words on the agreement page and the buttons. Change freely. */
