@@ -13,6 +13,26 @@
      On the wing card ........ the picture and ONLY the title (on the soft gradient).
      In the Explore popup .... full picture, title, description, link buttons,
                                and the "Our agreement" button.
+Syntax:
+ {
+    projectId:   'p-community-hub', 
+    floor:       '1',
+    wing:        'right',
+    openness:    'open',          // 'open', 'summary' or 'private'
+    title:       'Project name',
+    image:       'assets/projects/community-hub.jpg',
+    description: 'A short description.',
+    links:       [ { label: 'Visit', url: 'https://...' } ]
+    
+   agreement: {
+      intro:          'Write here, in plain words, what 97 Industry and the building agreed.',
+      theyBring:      [ 'What this project brings (example line)' ],
+      buildingBrings: [ 'What the building brings (example line)' ],
+      bothIncrease:   'How both sides grow from this agreement.',
+      agreedOn:       ''          // e.g. 'January 2027'
+           }
+  },
+
 
    HOW OPEN THE AGREEMENT IS  (always the project's own free choice)
      openness: 'open'      shows everything written in the agreement block
@@ -25,16 +45,29 @@
 
    PICTURES: put them in assets/projects/. File names are case-sensitive on GitHub Pages:
    "97-Industry.png" and "97-industry.png" are different files.
+
+
    ===================================================================== */
 const PLNS_PROJECTS = [
   {
-    projectId:   'p-community-hub',
-    title:       'Project name',
+    projectId:   '97-community-hub', 
+    floor:       '1',
+    wing:        'left',
+    openness:    'open',          // 'open', 'summary' or 'private'
+    title:       '97-Community-Hub',
     image:       'assets/projects/community-hub.jpg',
     description: 'A short description.',
-    links:       [ { label: 'Visit', url: 'https://...' } ]
+    links:       [ { label: 'Visit', url: 'https://7nine9seven.wixstudio.com/community-hub-97' } ],
     /* no floor/wing yet, so this placeholder is not shown */
+      agreement: {
+      intro:          'Write here, in plain words, what 97 Community Hub and the building agreed.',
+      theyBring:      [ 'What this project brings (example line)' ],
+      buildingBrings: [ 'What the building brings (example line)' ],
+      bothIncrease:   'How both sides grow from this agreement.',
+      agreedOn:       ''          // e.g. 'January 2027'
+           }
   },
+   
   {
     projectId:   '97-industry',
     floor:       '1',
