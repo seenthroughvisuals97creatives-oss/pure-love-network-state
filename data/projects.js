@@ -56,7 +56,7 @@ const PLNS_PROJECTS = [
     wing:        'left',
     openness:    'open',          // 'open', 'summary' or 'private'
     title:       '97-Community-Hub',
-    image:       'assets/projects/community-hub.jpg',
+    image:       'assets/projects/97-community-hub.png',
     description: 'A short description.',
     links:       [ { label: 'Visit', url: 'https://7nine9seven.wixstudio.com/community-hub-97' } ],
     /* now present */
@@ -94,9 +94,9 @@ const PLNS_PROJECTS = [
     wing:        'left',
     openness:    'open',          // 'open', 'summary' or 'private'
     title:       'Project name',
-    image:       'assets/projects/community-hub.jpg',
+    image:       'assets/projects/97-art-Galaxy.png',
     description: 'A short description.',
-    links:       [ { label: 'Visit', url: 'https://...' } ],
+    links:       [ { label: 'Visit', url: 'https://seenthroughvisuals97creatives-oss.github.io/97-art-Galaxy/97-art-galaxy.html' } ],
     
    agreement: {
       intro:          'Write here, in plain words, what 97 Industry and the building agreed.',
@@ -113,9 +113,9 @@ const PLNS_PROJECTS = [
     wing:        'right',
     openness:    'open',          // 'open', 'summary' or 'private'
     title:       'World Within',
-    image:       'assets/projects/community-hub.jpg',
+    image:       'assets/projects/wwbanner2.png',
     description: 'A short description.',
-    links:       [ { label: 'Visit', url: 'https://...' } ],
+    links:       [ { label: 'Visit', url: 'https://97divegentspirit-collab.github.io/world-within/index.html' } ],
     
    agreement: {
       intro:          'Write here, in plain words, what 97 Industry and the building agreed.',
