@@ -25,8 +25,8 @@ const PLNS_BUILDING = {
     },
     {
       id: 'floor-2', label: '2', name: 'Second floor',
-      left:  { id: 'wing-2-left',  position: 'left',  name: '', originWingId: null, entries: [] },
-      right: { id: 'wing-2-right', position: 'right', name: '', originWingId: null, entries: [] }
+      left:  { id: 'wing-2-left',  position: 'left',  name: '97 Art Galaxy', originWingId: null, entries: [] },
+      right: { id: 'wing-2-right', position: 'right', name: 'World Within', originWingId: null, entries: [] }
     },
     {
       id: 'floor-3', label: '3', name: 'Third floor',
