@@ -1,0 +1,131 @@
+/* =====================================================================
+   css/popup.css — THE FLOATING POPUPS (menu items, Join form, Explore)
+   Words: data/popups.js (menu) and data/joinform.js (form).  Behaviour: js/popup.js, js/menu.js.
+   The title and × stay still; the words SCROLL inside the card.
+   ===================================================================== */
+.pop-root {
+  position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; padding: 14px;
+  opacity: 0; transition: opacity .45s ease;
+}
+.pop-root.show { opacity: 1; }
+.pop-root[hidden] { display: none; }
+.pop-scrim { position: absolute; inset: 0; background: rgba(30,26,22,.45); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+
+/* The card: a column of  title  /  scrolling words  /  fixed footer */
+.pop-card {
+  position: relative; width: min(100%, 480px); max-height: min(86svh, 700px);
+  display: flex; flex-direction: column; overflow: hidden;      /* <- the words scroll inside, not the card */
+  border: 1px solid rgba(200,169,106,.85); border-radius: 18px;
+  background: linear-gradient(180deg, #fdfbf5, #f4eddc); box-shadow: 0 24px 60px rgba(40,34,28,.4), inset 0 0 0 4px #f8f3e6, inset 0 0 0 5px rgba(200,169,106,.4);
+  transform: translateY(12px); transition: transform .45s ease;
+}
+.pop-root.show .pop-card { transform: translateY(0); }
+.pop-close {
+  position: absolute; top: 10px; right: 12px; z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: transparent; color: var(--ink); font: 1.6rem/1 Georgia, serif; cursor: pointer;
+}
+.pop-close:hover, .pop-close:focus-visible { background: rgba(200,169,106,.2); outline: none; }
+.pop-title { flex: 0 0 auto; margin: 0; padding: 1.7rem 3rem .8rem; font: 400 1.35rem/1.3 Georgia, serif; color: var(--ink); text-align: center; }
+
+.pop-body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: .2rem 1.6rem 1.3rem;
+  overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y;
+  scrollbar-width: thin; scrollbar-color: rgba(200,169,106,.85) transparent;
+}
+/* "there is more below": a soft fade at the bottom until you reach the end */
+.pop-body.more { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 38px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 38px), transparent); }
+.pop-body p { margin: 0 0 .9rem; font-size: .98rem; line-height: 1.65; color: #5a5249; }
+.pop-body p:last-child { margin-bottom: 0; }
+
+/* Headed text (Services, Membership) */
+.pop-h { margin: 1.5rem 0 .5rem; padding-bottom: .35rem; font: 400 1.02rem/1.3 Georgia, serif; letter-spacing: .02em; color: var(--ink); border-bottom: 1px solid rgba(200,169,106,.45); }
+.pop-text > .pop-h:first-child { margin-top: .2rem; }
+.pop-list { list-style: none; margin: 0 0 .9rem; padding: 0; }
+.pop-list li { position: relative; padding: .22rem 0 .22rem 1.35rem; font-size: .96rem; line-height: 1.55; color: #5a5249; }
+.pop-list li::before { content: "\2726"; position: absolute; left: 0; top: .3rem; font-size: .7rem; color: var(--gold); }
+.pop-end { margin-top: 1.4rem !important; padding-top: 1rem; border-top: 1px solid rgba(200,169,106,.45); font-style: italic; text-align: center; }
+
+/* The fixed footer under the words */
+.pop-foot { flex: 0 0 auto; padding: .7rem 1.6rem .9rem; border-top: 1px solid rgba(200,169,106,.4); background: rgba(248,243,230,.9); }
+.pop-foot[hidden] { display: none; }
+.pop-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1.1rem; }
+.pop-links a { font: .64rem/1.6 "Helvetica Neue", Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #8a6d33; text-decoration: none; border-bottom: 1px solid rgba(200,169,106,.6); }
+.pop-links a:hover, .pop-links a:focus-visible { color: var(--ink); outline: none; }
+.pop-read { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap; }
+.pop-read-status { font: .72rem/1.4 "Helvetica Neue", Arial, sans-serif; letter-spacing: .06em; color: #6b6358; }
+.pop-read-status.done, .jf-read-note.done { color: #5f7a4a; }
+
+/* A soft gold button used across the popups */
+.soft-btn {
+  padding: .6rem 1.2rem; border: 1px solid var(--gold); border-radius: 999px; background: rgba(255,255,255,.8); color: var(--ink);
+  font: .7rem/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: background .3s ease;
+}
+.soft-btn[hidden] { display: none; }
+.soft-btn:hover, .soft-btn:focus-visible { outline: none; background: rgba(200,169,106,.25); }
+.soft-btn-quiet { border-color: rgba(200,169,106,.5); background: transparent; }
+.pop-actions { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; margin-top: 1.4rem; }
+.pop-exit p { text-align: center; }
+
+/* Announcements: the newest thing sits in a softly glowing, round-edged box */
+.an-newest {
+  margin: .5rem .3rem 1.7rem; padding: 1rem 1.15rem 1.05rem; border: 1px solid rgba(200,169,106,.9); border-radius: 20px;
+  background: linear-gradient(180deg, #fffdf7, #f8f0dc);
+  box-shadow: 0 0 0 4px rgba(200,169,106,.12), 0 0 22px rgba(200,169,106,.5);
+}
+.an-tag { display: inline-block; margin-bottom: .45rem; font: .62rem/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .28em; text-transform: uppercase; color: #8a6d33; }
+.an-title { margin: 0 0 .35rem; font: 400 1.1rem/1.35 Georgia, serif; color: var(--ink); }
+.an-quiet { font-style: italic; }
+.an-link { font: .7rem/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #8a6d33; }
+.an-list { list-style: none; margin: 0; padding: 0; }
+.an-list li { padding: .6rem 0; border-bottom: 1px solid rgba(200,169,106,.3); font-size: .95rem; color: #5a5249; }
+.an-list li:last-child { border-bottom: 0; }
+.an-list a { color: var(--ink); text-decoration-color: var(--gold); text-underline-offset: 4px; }
+
+/* The Join form (16px inputs so phones do not zoom in) */
+.jf-intro { font-size: .95rem; }
+.jf-field { display: block; margin: 0 0 .95rem; }
+.jf-label, .jf-contribute legend { display: block; margin: 0 0 .35rem; padding: 0; font: .66rem/1.4 "Helvetica Neue", Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #6b6358; }
+.jf input[type="text"], .jf input[type="email"], .jf textarea {
+  display: block; width: 100%; box-sizing: border-box; padding: .65rem .8rem; border: 1px solid rgba(200,169,106,.75); border-radius: 10px;
+  background: #fff; color: #2a2622; font: 16px/1.45 Georgia, serif; resize: vertical;
+}
+.jf input:focus, .jf textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,169,106,.3); }
+.jf-contribute { margin: 0 0 1rem; padding: 0; border: 0; min-width: 0; }
+.jf-check { display: flex; gap: .6rem; align-items: flex-start; padding: .32rem 0; font-size: .95rem; line-height: 1.45; color: #5a5249; cursor: pointer; }
+.jf-check input, .jf-agree input { flex: 0 0 auto; width: 18px; height: 18px; margin: .15rem 0 0; accent-color: #b79556; }
+.jf-other { margin: .5rem 0 0 1.6rem; }
+.jf-other[hidden] { display: none; }
+.jf-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.jf-read { margin: 1.2rem 0 .8rem; padding: .85rem; border: 1px dashed rgba(200,169,106,.8); border-radius: 12px; text-align: center; }
+.jf-read-note { margin: .6rem 0 0 !important; font-size: .84rem !important; line-height: 1.5; color: #6b6358 !important; }
+.jf-agree { display: flex; gap: .6rem; align-items: flex-start; margin: 0 0 1rem; font-size: .92rem; line-height: 1.5; color: #5a5249; }
+.jf-agree input:disabled + span { opacity: .55; }
+.jf-hint { margin: 0 0 .6rem !important; text-align: center; font-size: .82rem !important; color: #8a6d33 !important; }
+.jf-hint[hidden] { display: none; }
+.jf-submit {
+  display: block; width: 100%; padding: .85rem 1rem; border: 1px solid var(--gold); border-radius: 999px; background: rgba(200,169,106,.28); color: #2a2622;
+  font: .78rem/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: background .3s ease, opacity .3s ease;
+}
+.jf-submit:hover:not(:disabled), .jf-submit:focus-visible { outline: none; background: rgba(200,169,106,.5); }
+.jf-submit:disabled { opacity: .45; cursor: default; }
+.jf-msg { display: none; margin: .8rem 0 0 !important; padding: .7rem .9rem; border-radius: 10px; background: rgba(200,169,106,.16); font-size: .88rem !important; line-height: 1.5; color: #4a443c !important; }
+.jf-msg.show { display: block; }
+.jf-mail { color: #2a2622; }
+.jf-privacy { margin: .9rem 0 0 !important; font-size: .76rem !important; line-height: 1.5; color: #7a7266 !important; text-align: center; }
+.jf-thanks { text-align: center; }
+.jf-thanks .soft-btn { margin-top: .6rem; }
+
+/* A wing's Explore entries (used with the project library) */
+.pop-entry { margin: 0 0 1.2rem; }
+.pop-entry img { display: block; width: 100%; height: auto; border-radius: 10px; margin-bottom: .6rem; }   /* the FULL picture, nothing covers it */
+.pop-entry h3 { margin: 0 0 .3rem; font: 400 1.05rem/1.3 Georgia, serif; color: var(--ink); }
+.pop-entry a { color: var(--visitor-deep); }
+
+/* Explore popup: link buttons + agreement button; agreement page */
+.pe-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.pe-actions .soft-btn { text-decoration: none; display: inline-block; }
+.pe-agree { border-color: var(--gold); }
+.pe-agreement h3 { margin: 1.1rem 0 .3rem; font: 400 1rem/1.3 Georgia, serif; color: var(--ink); }
+.pe-note { font-size: .86rem; color: var(--ash); font-style: italic; }
+
+.pe-mark { align-self: center; font: .62rem/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--visitor-deep); }
